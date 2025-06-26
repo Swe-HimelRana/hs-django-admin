@@ -1,0 +1,364 @@
+
+/* Custom Styles */
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --primary: #18181b;
+  --primary-fg: #f7f7f7;
+  --secondary: #27272a;
+
+  --body-fg: #eeeeee;
+  --body-bg: #121212;
+  --body-quiet-color: #d0d0d0;
+  --body-medium-color: #e0e0e0;
+  --body-loud-color: #ffffff;
+
+  --breadcrumbs-link-fg: #e0e0e0;
+  --breadcrumbs-fg: #ffffff;
+  --breadcrumbs-bg: var(--primary);
+  --button-bg: #0c0a09;
+
+  --link-fg: #81d4fa;
+  --link-hover-color: #4ac1f7;
+  --link-selected-fg: #6f94c6;
+
+  --hairline-color: #272727;
+  --border-color: #353535;
+
+  --error-fg: #e35f5f;
+  --message-success-bg: #006b1b;
+  --message-warning-bg: #583305;
+  --message-error-bg: #570808;
+
+  --darkened-bg: #212121;
+  --selected-bg: #1b1b1b;
+  --selected-row: #00363a;
+
+  --close-button-bg: #333333;
+  --close-button-hover-bg: #666666;
+
+  color-scheme: dark;
+}
+
+ 
+html[data-theme="dark"] {
+  --primary: #18181b;
+  --primary-fg: #f7f7f7;
+  --secondary: #27272a;
+
+  --body-fg: #eeeeee;
+  --body-bg: #121212;
+  --body-quiet-color: #d0d0d0;
+  --body-medium-color: #e0e0e0;
+  --body-loud-color: #ffffff;
+
+  --breadcrumbs-link-fg: #e0e0e0;
+  --breadcrumbs-bg: var(--primary);
+  --breadcrumbs-fg: #ffffff;
+  --button-bg: #0c0a09;
+
+  --link-fg: #81d4fa;
+  --link-hover-color: #4ac1f7;
+  --link-selected-fg: #6f94c6;
+
+  --hairline-color: #272727;
+  --border-color: #353535;
+
+  --error-fg: #e35f5f;
+  --message-success-bg: #27272a;
+  --message-warning-bg: #583305;
+  --message-error-bg: #570808;
+
+  --darkened-bg: #212121;
+  --selected-bg: #1b1b1b;
+  --selected-row: #00363a;
+
+  --close-button-bg: #333333;
+  --close-button-hover-bg: #666666;
+
+  color-scheme: dark;
+}
+#site-name {
+  padding: 0;
+  margin: 0;
+  margin-inline-end: 20px;
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: #f5f5f5;
+}
+
+#site-name a:visited {
+  color: #ffffff;
+}
+
+
+#header {
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #262626; /* light background */
+    color: #111827; /* dark text */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); /* soft shadow */
+    border-radius: 0 0 12px 12px;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    margin-bottom:10px;
+    
+  }
+
+  #header a:visited { color: #ffffff}
+  a:link, a:visited {
+      color: #d4d4d4;
+      text-decoration: none;
+      transition: color 0.15s, background 0.15s;
+  }
+
+  #header #user-tools {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 20px;
+    background-color: #171717;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #eef0f2;
+  }
+  
+  #header #user-tools strong {
+    color: #f0f3f9;
+    font-weight: 600;
+  }
+  
+  #header #user-tools a {
+    text-decoration: none;
+    color: #22d443;
+    transition: color 0.2s ease;
+  }
+  
+  #header #user-tools a:hover {
+    color: #28d26f;
+    text-decoration: underline;
+  }
+  
+  #header #logout-form {
+    display: inline;
+  }
+  
+  #header #logout-form button {
+    background-color: #ef4444;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  #header #logout-form button:hover {
+    background-color: #dc2626;
+  }
+  
+  #header .theme-toggle {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  #header .theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  #header .theme-toggle svg {
+    width: 25px;
+    height: 25px;
+    fill: #f1f1f2;
+  }
+
+
+  .button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: var(--button-bg);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: var(--button-fg);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .breadcrumbs {
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+
+  /*  ========================== Table Styles ========================== */
+
+  .module caption {
+    background-color: #27272a;
+    color: #ffffff;
+    border-radius: 12px;
+    padding:12px;
+    font-weight: bold;
+  }
+
+  .module a {
+    color: #27272a;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .module a:hover {
+    color: #28d26f;
+  }
+ 
+ /*  ========================== Sidebar Styles ========================== */
+
+ #nav-sidebar{
+    z-index: 15;
+    flex: 0 0 275px;
+    left: -276px;
+    margin-left: -276px;
+    border-top: 0px solid transparent;
+    border-right: 0px solid var(--hairline-color);
+    background-color: var(--body-bg);
+    overflow: auto;
+}
+
+ #nav-filter{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 15px;
+    margin: 10px 0px;
+    border: 1px solid var(--border-color);
+    background-color: var(--darkened-bg);
+    color: var(--body-fg);
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#nav-filter a {
+    color: #19b179;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/*  ========================== Form Items ========================== */
+
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField
+ {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 6px;
+    margin-top: 0;
+    color: var(--body-fg);
+    background-color: #222a30;
+    font-size: 16px;
+}
+
+/* ===================== Custom Module ===================== */
+
+.module {
+  border: none;
+  margin-bottom: 30px;
+  background: #18181b;
+  border-radius: 10px;
+}
+
+.rouded-corner {
+  border-radius: 10px;
+
+}
+
+.hsmodule {
+  border-radius: 20px;
+  padding: 5px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  border: 1px solid #3f3f46;
+  margin-bottom: 10px;;
+}
+.hsmodule h2 {
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+}
+
+.hsmodule ul.actionlist
+{
+    margin-left: -30px;
+}
+
+/*  ========================== Stylish background ===================== */
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #0d1117;
+  background-image:
+    linear-gradient(#222 1px, transparent 1px),
+    linear-gradient(90deg, #222 1px, transparent 1px);
+  background-size: 40px 40px; /* grid cell size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #c9d1d9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*  ========================== Custom Admin result list table  ========================== */
+
+ 
+
+#result_list tbody tr td {
+  color: #d6d3d1;
+}
+
+#result_list tbody tr td a {
+  color: #d6d3d1;;
+}
+
+#result_list tbody tr th a {
+  color: #d6d3d1;
+  font-size: 17px;
+}
+
+
+#result_list tbody tr th a {
+  color: #d6d3d1;;
+}
+
+#result_list tbody tr th a:hover {
+  color: #19b179;;
+}
+
+/*  ========================== Disable expendable sidebar  ========================== */
+
+  #nav-sidebar {
+    display: none;
+  }
+
+  #content-main {
+    margin-left: 0;
+  }
+
+ 
+  /*  ========================== Footer Styles ========================== */
+
+   

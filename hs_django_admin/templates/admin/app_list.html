@@ -1,0 +1,709 @@
+{% load i18n %}
+<div class="modern-admin-container-wrapper">
+  <div class="modern-admin-container">
+    {% if app_list %}
+    <div class="apps-wrapper">
+      {% for app in app_list %}
+      <div
+        class="app-{{ app.app_label }} app-section{% if app.app_url in request.path|urlencode %} current-app{% endif %}">
+        <div class="app-header">
+          <div class="app-header-content">
+            <div class="app-info">
+              <div class="app-icon-wrapper">
+                <div class="app-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="15" height="15" rx="2" ry="2" />
+                    <circle cx="9" cy="9" r="2" />
+                    <path d="M21 15.5c-.3-1.1-1.4-2-2.8-2.5" />
+                  </svg>
+                </div>
+              </div>
+              <div class="app-details">
+                <a href="{{ app.app_url }}" class="app-title"
+                  title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">
+                  {{ app.name }}
+                </a>
+ 
+              </div>
+            </div>
+             
+          </div>
+        </div>
+
+        <div class="models-container">
+          <!-- Hidden table for accessibility -->
+          <table class="visually-hidden">
+            <caption>
+              <a href="{{ app.app_url }}" class="section"
+                title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">{{
+                app.name }}</a>
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">{% translate 'Model name' %}</th>
+                <th scope="col">{% translate 'Add link' %}</th>
+                <th scope="col">{% translate 'Change or view list link' %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for model in app.models %}
+              {% with model_name=model.object_name|lower %}
+              <tr
+                class="model-{{ model_name }}{% if model.admin_url in request.path|urlencode %} current-model{% endif %}">
+                <th scope="row" id="{{ app.app_label }}-{{ model_name }}">
+                  {% if model.admin_url %}
+                  <a href="{{ model.admin_url }}" {% if model.admin_url in request.path|urlencode %} aria-current="page"
+                    {% endif %}>{{ model.name }}</a>
+                  {% else %}
+                  {{ model.name }}
+                  {% endif %}
+                </th>
+                {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="addlink"
+                    aria-describedby="{{ app.app_label }}-{{ model_name }}">{% translate 'Add' %}</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                {% if model.admin_url and show_changelinks %}
+                {% if model.view_only %}
+                <td><a href="{{ model.admin_url }}" class="viewlink"
+                    aria-describedby="{{ app.app_label }}-{{ model_name }}">{% translate 'View' %}</a></td>
+                {% else %}
+                <td><a href="{{ model.admin_url }}" class="changelink"
+                    aria-describedby="{{ app.app_label }}-{{ model_name }}">{% translate 'Change' %}</a></td>
+                {% endif %}
+                {% elif show_changelinks %}
+                <td></td>
+                {% endif %}
+              </tr>
+              {% endwith %}
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <!-- Modern card interface -->
+          <div class="models-grid">
+            {% for model in app.models %}
+            {% with model_name=model.object_name|lower %}
+            <div
+              class="model-card model-{{ model_name }}{% if model.admin_url in request.path|urlencode %} current-model{% endif %}">
+              <div class="model-card-header">
+                <div class="model-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14,2 14,8 20,8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10,9 9,9 8,9" />
+                  </svg>
+                </div>
+                <div class="model-info">
+                  <h3 class="model-name" id="{{ app.app_label }}-{{ model_name }}">
+                    {% if model.admin_url %}
+                    <a href="{{ model.admin_url }}" {% if model.admin_url in request.path|urlencode %}
+                      aria-current="page" {% endif %}>{{ model.name }}</a>
+                    {% else %}
+                    {{ model.name }}
+                    {% endif %}
+                  </h3>
+                  <span class="model-description">Manage {{ model.name|lower }} records</span>
+                </div>
+              </div>
+
+              <div class="model-actions">
+                {% if model.add_url %}
+                <a href="{{ model.add_url }}" class="action-btn primary-btn addlink"
+                  aria-describedby="{{ app.app_label }}-{{ model_name }}">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="16" />
+                    <line x1="8" y1="12" x2="16" y2="12" />
+                  </svg>
+                  {% translate 'Add' %}
+                </a>
+                {% endif %}
+
+                {% if model.admin_url and show_changelinks %}
+                {% if model.view_only %}
+                <a href="{{ model.admin_url }}" class="action-btn secondary-btn viewlink"
+                  aria-describedby="{{ app.app_label }}-{{ model_name }}">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  {% translate 'View' %}
+                </a>
+                {% else %}
+                <a href="{{ model.admin_url }}" class="action-btn secondary-btn changelink"
+                  aria-describedby="{{ app.app_label }}-{{ model_name }}">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                  </svg>
+                  {% translate 'Manage' %}
+                </a>
+                {% endif %}
+                {% endif %}
+              </div>
+            </div>
+            {% endwith %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+      </div>
+      <h3 class="empty-title">No Applications Available</h3>
+      <p class="empty-message">{% translate 'You do not have permission to view or edit anything.' %}</p>
+    </div>
+    {% endif %}
+  </div>
+  <div class="right-side-container">
+    <div class="hsmodule">
+      <div class="app-header rouded-corner">
+        <h2 class="app-header-content">{% translate 'System Info' %}</h2>
+      </div>
+      <ul class="info-list">
+        <li><strong>Operating System:</strong> {{ os }}</li>
+        <li><strong>Python:</strong> {{ python_version }}</li>
+        <li><strong>Django:</strong> {{ django_version }}</li>
+        <li><strong>Database:</strong> {{ database_engine }}</li>
+        <li> <a href="{% if has_ssl %}https{% else %}http{% endif %}://{{ request.get_host }}" target="_blank">{% if has_ssl %}https{% else %}http{% endif %}://{{ request.get_host }}</a></li>
+      </ul>
+    </div>
+    <div class="hsmodule">
+      <div class="app-header rouded-corner">
+        <h2 class="app-header-content">{% translate 'Your Info' %}</h2>
+      </div>
+
+      <ul class="info-list">
+        <li><strong>Last Login:</strong> {{ user.last_login }}</li>
+        <li><strong>Date Joined:</strong> {{ user.date_joined }}</li>
+        <li><strong>Your IP:</strong> {{ request.META.REMOTE_ADDR }}</li>
+      </ul>
+    </div>
+    <div class="hsmodule">
+      <div class="app-header rouded-corner">
+        <h2 class="app-header-content">{% translate 'Recent Activity' %}</h2>
+      </div>
+
+      <h3>{% translate 'My actions' %}</h3>
+      {% load log %}
+      {% get_admin_log 10 as admin_log for_user user %}
+      {% if not admin_log %}
+      <p>{% translate 'None available' %}</p>
+      {% else %}
+      <ul class="actionlist">
+        {% for entry in admin_log %}
+        <li
+          class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+          <span class="visually-hidden">{% if entry.is_addition %}{% translate 'Added:' %}{% elif entry.is_change %}{%
+            translate 'Changed:' %}{% elif entry.is_deletion %}{% translate 'Deleted:' %}{% endif %}</span>
+          {% if entry.is_deletion or not entry.get_admin_url %}
+          {{ entry.object_repr }}
+          {% else %}
+          <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+          {% endif %}
+          <br>
+          {% if entry.content_type %}
+          <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+          {% else %}
+          <span class="mini quiet">{% translate 'Unknown content' %}</span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+ 
+
+  .system-info {
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+  }
+
+  .system-info h3 {
+    color: #ffffff;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    padding: 2px;
+  }
+
+  .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .info-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .info-list li:last-child {
+    border-bottom: none;
+  }
+
+  .info-list strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .modern-admin-container-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .right-side-container {
+    min-width: 20vw;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  }
+
+  .modern-admin-container {
+    min-width: 75vw;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+   
+  }
+
+  .apps-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .app-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .app-section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .app-section.current-app {
+    border: 2px solid #4f46e5;
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.2);
+  }
+
+  .app-header {
+    background: linear-gradient(135deg, #171717 0%, #262626 100%);
+    padding: 5px 5px;
+    color: white;
+  }
+
+  .app-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .app-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .app-icon-wrapper {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 12px;
+    backdrop-filter: blur(10px);
+  }
+
+  .app-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .app-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .app-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    letter-spacing: -0.025em;
+    transition: opacity 0.2s ease;
+  }
+
+  .app-title:hover {
+    opacity: 0.9;
+  }
+
+  .app-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+
+  .app-expand {
+    color: rgba(255, 255, 255, 0.8);
+    transition: transform 0.2s ease;
+  }
+
+  .models-container {
+    padding: 32px;
+  }
+
+  .models-grid {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .model-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    min-width: 320px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .model-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .model-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .model-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: #4f46e5;
+  }
+
+  .model-card.current-model {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #4f46e5;
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+  }
+
+  .model-card.current-model::before {
+    transform: scaleX(1);
+  }
+
+  .model-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .model-icon {
+    background: linear-gradient(135deg, #27272a 0%, #52525b 100%);
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  }
+
+  .model-info {
+    flex: 1;
+  }
+
+  .model-name {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: -0.025em;
+  }
+
+  .model-name a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+  }
+
+  .model-name a:hover {
+    color: #4f46e5;
+  }
+
+  .model-name a[aria-current="page"] {
+    color: #4f46e5;
+  }
+
+  .model-description {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .model-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .primary-btn {
+    background: linear-gradient(135deg, #171717 0%, #262626 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  }
+
+  .primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+  }
+
+  .secondary-btn {
+    background: #262626;
+    color: #404040;
+    border-color: #737373;
+  }
+
+  .secondary-btn:hover {
+    background: #171717;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 32px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .empty-icon {
+    margin-bottom: 24px;
+    color: #9ca3af;
+  }
+
+  .empty-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+  }
+
+  .empty-message {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /* Custom scrollbar */
+  .models-grid::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .models-grid::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 4px;
+  }
+
+  .models-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    border-radius: 4px;
+  }
+
+  .models-grid::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #3730a3, #6d28d9);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .modern-admin-container {
+      padding: 16px;
+    }
+
+    .app-header {
+      padding: 20px 24px;
+    }
+
+    .app-title {
+      font-size: 20px;
+    }
+
+    .models-container {
+      padding: 24px 20px;
+    }
+
+    .models-grid {
+      gap: 16px;
+    }
+
+    .model-card {
+      min-width: 280px;
+      padding: 20px;
+    }
+
+    .model-name {
+      font-size: 18px;
+    }
+
+    .model-actions {
+      flex-direction: column;
+    }
+
+    .action-btn {
+      justify-content: center;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+
+
+    .app-section {
+      background: rgba(148, 163, 184, 0.1);
+      border-color: rgba(148, 163, 184, 0.1);
+    }
+
+    .model-card {
+      background: #09090b;
+      border-color: #475569;
+    }
+
+    .model-card.current-model {
+      background: linear-gradient(135deg, #292524 0%, #78716c 100%);
+    }
+
+    .model-name {
+      color: #f1f5f9;
+    }
+
+    .model-description {
+      color: #94a3b8;
+    }
+
+    .empty-state {
+      background: rgba(30, 41, 59, 0.95);
+    }
+
+    .empty-title {
+      color: #f1f5f9;
+    }
+
+    .empty-message {
+      color: #94a3b8;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .app-section {
+      border: 2px solid #000;
+    }
+
+    .model-card {
+      border: 2px solid #000;
+    }
+
+    .action-btn {
+      border: 2px solid currentColor;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+
+    .app-section,
+    .model-card,
+    .action-btn {
+      transition: none;
+    }
+
+    .app-section:hover,
+    .model-card:hover,
+    .action-btn:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .modern-admin-container {
+      min-width: 93vw;
+    }
+    .right-side-container {
+      display: none !important;
+    }
+  }
+
+</style>

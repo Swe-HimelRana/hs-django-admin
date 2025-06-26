@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Django
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+.env
+.env.*
+
+# VSCode / IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# pipenv / poetry / virtualenv
+Pipfile.lock
+poetry.lock
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Migrations (optional – keep if you want migrations tracked)
+# */migrations/*.py
+*/migrations/__pycache__/
+*/__pycache__/
+
+# MyPy / Coverage / Pytest
+.mypy_cache/
+.dmypy.json
+.pytest_cache/
+coverage.xml
+htmlcov/
+
+# Jupyter / Notebook
+.ipynb_checkpoints
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Systemd / PID files
+*.pid
+
+# Docker
+*.pid
+*.pid.lock
+docker-compose.override.yml
