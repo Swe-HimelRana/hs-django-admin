@@ -1,6 +1,8 @@
 # Himosoft Django Admin
 
-A customizable Django admin interface with enhanced styling and system information display.
+Customized Django admin panel with advanced UI and real-time system insights
+
+![Preview](https://raw.githubusercontent.com/Swe-HimelRana/hs-django-admin/refs/heads/main/preview.png)
 
 ## Features
 
@@ -178,3 +180,16 @@ No additional configuration is required for basic functionality.
 - Static files are automatically collected when running `python manage.py collectstatic`
 - **Default admin compatibility is automatically enabled when the app loads**
 - All existing `admin.site.register()` calls will work without modification 
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support
+
+If you encounter any issues or have questions, please [open an issue](https://github.com/Swe-HimelRana/hs-django-admin/issues) on GitHub. 

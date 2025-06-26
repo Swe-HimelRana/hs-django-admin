@@ -7,7 +7,7 @@ def read_readme():
     if os.path.exists(readme_path):
         with open(readme_path, 'r', encoding='utf-8') as f:
             return f.read()
-    return "A customizable Django admin interface with enhanced styling and system information display."
+    return "Customized Django admin panel with advanced UI and real-time system insights"
 
 # Read version from __init__.py
 def get_version():
@@ -16,12 +16,12 @@ def get_version():
         for line in f:
             if line.startswith('__version__'):
                 return line.split('=')[1].strip().strip('"\'')
-    return '0.1.0'
+    return '1.0.0'
 
 setup(
     name='hs-django-admin',
     version=get_version(),
-    description='A customizable Django admin interface with enhanced styling and system information display',
+    description='Customized Django admin panel with advanced UI and real-time system insights',
     long_description=read_readme(),
     long_description_content_type='text/markdown',
     author='Himel',

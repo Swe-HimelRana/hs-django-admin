@@ -1,6 +1,9 @@
 # HS Django Admin
 
-A customizable Django admin interface with enhanced styling and system information display.
+Customized Django admin panel with advanced UI and real-time system insights
+
+
+![Preview](https://raw.githubusercontent.com/Swe-HimelRana/hs-django-admin/refs/heads/main/preview.png)
 
 ## Features
 
