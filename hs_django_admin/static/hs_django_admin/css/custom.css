@@ -4,43 +4,6 @@ html {
   scroll-behavior: smooth;
 }
 
-:root {
-  --primary: #18181b;
-  --primary-fg: #f7f7f7;
-  --secondary: #27272a;
-
-  --body-fg: #eeeeee;
-  --body-bg: #121212;
-  --body-quiet-color: #d0d0d0;
-  --body-medium-color: #e0e0e0;
-  --body-loud-color: #ffffff;
-
-  --breadcrumbs-link-fg: #e0e0e0;
-  --breadcrumbs-fg: #ffffff;
-  --breadcrumbs-bg: var(--primary);
-  --button-bg: #0c0a09;
-
-  --link-fg: #81d4fa;
-  --link-hover-color: #4ac1f7;
-  --link-selected-fg: #6f94c6;
-
-  --hairline-color: #272727;
-  --border-color: #353535;
-
-  --error-fg: #e35f5f;
-  --message-success-bg: #006b1b;
-  --message-warning-bg: #583305;
-  --message-error-bg: #570808;
-
-  --darkened-bg: #212121;
-  --selected-bg: #1b1b1b;
-  --selected-row: #00363a;
-
-  --close-button-bg: #333333;
-  --close-button-hover-bg: #666666;
-
-  color-scheme: dark;
-}
 
  
 html[data-theme="dark"] {
@@ -99,8 +62,8 @@ html[data-theme="dark"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000000; /* light background */
-    color: #111827; /* dark text */
+    background-color: #000000;  
+    color: #111827; 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); /* soft shadow */
     border-radius: 0 0 12px 12px;
     font-family: 'Inter', sans-serif;
@@ -139,12 +102,12 @@ html[data-theme="dark"] {
   
   #header #user-tools a {
     text-decoration: none;
-    color: #22d443;
+    color: #22d4cb;
     transition: color 0.2s ease;
   }
   
   #header #user-tools a:hover {
-    color: #28d26f;
+    color: #28a2d2;
     text-decoration: underline;
   }
   

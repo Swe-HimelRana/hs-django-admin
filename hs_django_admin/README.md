@@ -4,7 +4,7 @@ A customizable Django admin interface with enhanced styling and system informati
 
 ## Features
 
-- Custom admin site with Himosoft branding
+- Custom admin site
 - System information display (OS, Python version, Django version, database engine)
 - SSL status indicator
 - Custom CSS styling
@@ -28,14 +28,29 @@ A customizable Django admin interface with enhanced styling and system informati
 
 ### Basic Integration
 
+In you main `settings.py`
+
+```python
+INSTALLED_APPS = [
+    'hs_django_admin', # it must be at top
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # ... your other apps
+]
+```
+
 In your main `urls.py`:
 
 ```python
 from django.urls import path
-from hs_django_admin.admin import get_admin_site
+from hs_django_admin.admin import hs_admin
 
 urlpatterns = [
-    path('admin/', get_admin_site().urls),
+    path('admin/', hs_admin.urls),
     # ... your other URL patterns
 ]
 ```
@@ -63,10 +78,10 @@ admin_site.register(YourModel)
 
 #### Option 3: Import the admin site instance directly
 ```python
-from hs_django_admin.admin import admin_site
+from hs_django_admin.admin import hs_admin
 from your_app.models import YourModel
 
-admin_site.register(YourModel)
+hs_admin.register(YourModel)
 ```
 
 #### Option 4: Create your own admin site instance
@@ -137,6 +152,19 @@ The app automatically provides:
 - **Automatic compatibility with default admin.site.register()**
 
 No additional configuration is required for basic functionality.
+
+
+## Your own branding
+
+- In in your django settings.py 
+    ```python
+        # Django Admin Settings
+        ADMIN_SITE_HEADER = "Your Own Admin"
+        ADMIN_SITE_TITLE = "Your Own Admin"
+        ADMIN_INDEX_TITLE = "Welcome to Your Own Admin"
+        ADMIN_LOGO_URL = "https://example.com/logo.png" # this will also work as admin shortcut icon
+        ADMIN_FOOTER_ENABLED = False # this is a footer of himosoft info. You can disable it ❤️
+    ```
 
 ## Dependencies
 

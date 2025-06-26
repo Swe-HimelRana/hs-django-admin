@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include hs_django_admin/static *
+recursive-include hs_django_admin/templates *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co] 

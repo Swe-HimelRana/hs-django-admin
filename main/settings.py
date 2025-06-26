@@ -130,5 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = "Smart Admin"
 ADMIN_SITE_TITLE = "Smart Admin"
 ADMIN_INDEX_TITLE = "Welcome to Smart Admin"
-ADMIN_LOGO_URL = "https://example.com/logo.png"
 ADMIN_FOOTER_ENABLED = False

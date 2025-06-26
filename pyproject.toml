@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hs-django-admin"
+version = "1.0.0"
+description = "Customized Django admin panel with advanced UI and real-time system insights."
+readme = "hs_django_admin/README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Himosoft", email = "contact@himosoft.com.bd"}
+]
+maintainers = [
+    {name = "Himel", email = "contact@himelrana.com"}
+]
+keywords = ["django", "admin", "interface", "customization", "styling", "custom django admin"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "Django>=5.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/Swe-HimelRana/hs-django-admin"
+Documentation = "https://github.com/Swe-HImelRana/hs-django-admin#readme"
+Repository = "https://github.com/Swe-HimelRana/hs-django-admin"
+"Bug Tracker" = "https://github.com/Swe-HimelRana/hs-django-admin/issues"
+
+[project.optional-dependencies]
+dev = [
+    "twine>=4.0.0",
+    "build>=0.10.0",
+    "check-manifest>=0.48",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["hs_django_admin*"]
+
+[tool.setuptools.package-data]
+"hs_django_admin" = ["static/**/*", "templates/**/*"] 

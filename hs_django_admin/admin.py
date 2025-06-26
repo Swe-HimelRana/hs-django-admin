@@ -43,7 +43,7 @@ class HSDjangoAdminMixin:
         return context
 
 # Create a default admin site instance
-admin_site = HSDjangoAdmin(name='hs_django_admin')
+hs_admin= HSDjangoAdmin(name='hs_django_admin')
 
 def register_default_models():
     """Register default models with the custom admin site"""
@@ -51,7 +51,7 @@ def register_default_models():
 
 def get_admin_site():
     """Get the custom admin site instance"""
-    return admin_site
+    return hs_admin
 
 def enable_default_admin_compatibility():
     """
@@ -64,7 +64,7 @@ def enable_default_admin_compatibility():
     def custom_register(model_or_iterable, admin_class=None, **options):
         """Redirect registration to custom admin site"""
         try:
-            return admin_site.register(model_or_iterable, admin_class, **options)
+            return hs_admin.register(model_or_iterable, admin_class, **options)
         except admin.sites.AlreadyRegistered:
             # If already registered, just return without error
             return None
