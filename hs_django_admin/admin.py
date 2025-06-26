@@ -2,18 +2,25 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 import platform
 import django
+from django.conf import settings
+
+
 
 class HSDjangoAdmin(admin.AdminSite):
-    site_header = "Admin Panel"
-    site_title = "Himosoft Application Admin Portal"
-    index_title = "Welcome to Admin Panel"
-    
+    site_header = getattr(settings, "ADMIN_SITE_HEADER", "Admin Panel")
+    site_title = getattr(settings, "ADMIN_SITE_TITLE", "Admin Portal")
+    index_title = getattr(settings, "ADMIN_INDEX_TITLE", "Welcome to Admin Panel")
+    logo_url = getattr(settings, "ADMIN_LOGO_URL", "https://himosoft.com.bd/shortlogo.png")
+    footer_enabled = getattr(settings, "ADMIN_FOOTER_ENABLED", True)
+ 
 
     def each_context(self, request):
         context = super().each_context(request)
         context['site_header'] = self.site_header
         context['site_title'] = self.site_title
         context['index_title'] = self.index_title
+        context['logo_url'] = self.logo_url
+        context['footer_enabled'] = self.footer_enabled
         context['os'] = platform.system()
         context['python_version'] = platform.python_version()
         context['django_version'] = django.get_version()

@@ -124,3 +124,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Django Admin Settings
+ADMIN_SITE_HEADER = "Smart Admin"
+ADMIN_SITE_TITLE = "Smart Admin"
+ADMIN_INDEX_TITLE = "Welcome to Smart Admin"
+ADMIN_LOGO_URL = "https://example.com/logo.png"
+ADMIN_FOOTER_ENABLED = False
